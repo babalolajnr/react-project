@@ -12,21 +12,6 @@ const sampleJsonCleanProxy = createProxyMiddleware({
 });
 // Forward all requests to the target server
 app.use("/", sampleJsonCleanProxy);
-// app.use(
-//   "/",
-//   createProxyMiddleware("api", {
-//     target: "https://myapi.smartcode.com.ng/sample-json-clean",
-//     changeOrigin: true,
-//   })
-// );
-
-// app.use(
-//   "/",
-//   createProxyMiddleware({
-//     target: "https://myapi.smartcode.com.ng/sample-json-clean",
-//     changeOrigin: true,
-//   })
-// );
 
 // Start the server
 app.listen(3000, () => {

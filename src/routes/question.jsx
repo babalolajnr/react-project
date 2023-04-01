@@ -28,10 +28,10 @@ function LongestWord(sen) {
 
 function Input({ text, handleChange, labels, id }) {
   return (
-    <div class="flex flex-col-reverse">
+    <div className="flex flex-col-reverse">
       <input
         type="text"
-        class="py-3 border-2 border-black border-opacity-20 outline-none px-3 rounded-lg  
+        className="py-3 border-2 border-black border-opacity-20 outline-none px-3 rounded-lg  
       focus:border-black transition-all ease-in duration-150 w-full"
         name="vowel-count"
         value={text}
@@ -40,7 +40,7 @@ function Input({ text, handleChange, labels, id }) {
       />
       <label
         for="vowel-count"
-        class="text-black text-opacity-50 peer-focus:text-black transition-all ease-in duration-150"
+        className="text-black text-opacity-50 peer-focus:text-black transition-all ease-in duration-150"
       >
         {labels[parseInt(id) - 1]}
       </label>
@@ -99,6 +99,15 @@ export default function Question() {
 
   useEffect(() => {
     if (parseInt(id) === 3) {
+      /**
+       * Please note that the server at https://myapi.smartcode.com.ng does not have CORS enabled.
+       * Therefore, it is not possible to query the server directly from client-side code due to
+       * browser security restrictions.To bypass this issue, a proxy server has been created to
+       * act as an intermediary between client-side code and the target API. To start the proxy server,
+       * navigate to the server directory located in the root directory and execute the command
+       * `node main.js` or npm run dev. Once the proxy server is running, it will allow the
+       * client-side code to access the required resources through the designated API routes.
+       */
       fetch("http://localhost:3000/").then((res) => {
         res.json().then((data) => {
           const input = { ...data };
@@ -112,23 +121,12 @@ export default function Question() {
     }
 
     if (parseInt(id) === 4) {
-      //   fetch("https://myapi.smartcode.com.ng/count-age", {
-      //     mode: "no-cors",
-      //   }).then((res) => {
-      //     // res.text().then((data) => {
-      //     //     console.log(data)
-      //     // })
-      //     res.arrayBuffer().then((buf) => {
-      //       console.log(buf.slice(0, -1).toString());
-      //     });
-      //   });
-
       /**
-       * NOTE: The URL given in Question Four return an improperly formatted JSON string.
-       * The closing double quotes is missing. This causes the Javascript to not be able
-       * to parse it into a JSON object. I have taken the liberty of querying the endpoint
-       * manually to extract the data and continue the remaining process. Thank you for your
-       * understanding.
+       * Please be informed that the URL provided in Question Four returns an incorrectly
+       * formatted JSON string as it lacks a closing double quote. As a result, the
+       * JavaScript code is unable to parse it into a JSON object. I have taken the
+       * initiative to manually query the endpoint to extract the required data and proceed
+       * with the subsequent steps. Thank you for your cooperation and understanding in this matter.
        */
 
       let response = {
@@ -161,6 +159,7 @@ export default function Question() {
     }
   }, []);
 
+  //   Return an error page for page ids that fall outside of the listed questions
   if (!allowedIds.includes(parseInt(id))) {
     return <ErrorPage />;
   }
@@ -190,8 +189,8 @@ export default function Question() {
         <h1 className="text-6xl font-bold">Question {id}</h1>
       </div>
       <div className="lg:flex lg:justify-center lg:items-center lg:basis-1/2">
-        <form class="w-1/2 flex flex-col">
-          <div class="flex flex-col gap-10">
+        <form className="w-1/2 flex flex-col">
+          <div className="flex flex-col gap-10">
             {questionsThatRequireInput.includes(parseInt(id)) ? (
               <Input
                 handleChange={handleChange}
@@ -201,7 +200,7 @@ export default function Question() {
               />
             ) : null}
             <div className="flex justify-center flex-col">
-              <h3 class="text-xl font-semibold text-center">Response</h3>
+              <h3 className="text-xl font-semibold text-center">Response</h3>
               <span className="text-center">{response}</span>
             </div>
           </div>
